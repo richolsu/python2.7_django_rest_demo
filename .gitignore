@@ -1,0 +1,5 @@
+/.idea
+/quickstart/__pycache__
+/quickstart/migrations
+/tutorial/__pycache__
+*.pyc
