@@ -1,7 +1,8 @@
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+
+from rest_framework import generics, viewsets, filters
+
+from quickstart.filters import AccountFilter
 from .serializers import *
-from .models import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -26,4 +27,16 @@ class AccountViewSet(viewsets.ModelViewSet):
     """
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+    filter_class = AccountFilter
+
+
+class AccountListView(generics.ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('name', 'age')
+    ordering = ('name',)
+
+
+
 
